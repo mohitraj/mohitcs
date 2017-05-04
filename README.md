@@ -1,4 +1,4 @@
-If you want to learn Python by Mohit drop your message http://l4wisdom.com/contact...
+If you want to learn Python by Mohit drop your message http://l4wisdom.com/contact.php
 Best Python Training in NCR, NOIDA, DELHI, Gurgaon by LEAPX.in.
 Best Information Security Training in NCR, NOIDA, DELHI, Gurgaon by LEAPX.in.
 
