@@ -16,11 +16,12 @@ i = 1
 
 
 def folder_open(path):
-    path = path.rsplit(":", 1)[0]
+    path = path.rsplit("/", 1)[0]
     path_list = path.split("\\")
     # print path_list
     os.chdir(path_list[0][0:2])
-    os.chdir(path_list[0][2:])
+    if path_list[0][2:]:
+        os.chdir(path_list[0][2:])
     if len(path_list) > 1:
         for i in xrange(1, len(path_list) - 1):
             os.chdir(path_list[i])
@@ -30,17 +31,18 @@ def folder_open(path):
 
 def file_run(path1):
     path= path1[2:]
-    #import pdb; pdb.set_trace()
-    file_list = path.split("//")
-    file_list1 = file_list[0].split(":")[0]
 
-    file_to_open =file_list[0].split(":")[1]
+    file_list = path.split("//")
+    file_list1 = file_list[0].split("/")[0]
+
+    file_to_open =file_list[0].split("/")[1]
     print "file to open", file_to_open
     file_list = file_list1.split("\\")
     os.chdir(path1[0:2]+'//')
-    for each in file_list:
-        os.chdir(each)
-    
+    if file_list[0]:
+        for each in file_list:
+           os.chdir(each)
+        print "yes"
     file_to_open= file_to_open.strip()
     file_name = '"'+file_to_open +'"'
 
@@ -187,8 +189,11 @@ def file_search(file_name, drive=None):
     print "Path \t\t: File-name"
     for key in file_dict:
         if re.search(file_to_be_searched, key):
-            # path1 = file_dict[key]
-            str1 = file_dict[key] + " : " + key.split("|")[0]
+            str1 = file_dict[key] + "/" + key.split("|")[0]
+
+            #else :
+            #   str1 = file_dict[key]  + key.split("|")[0]
+
             list1.append(str1)
     t2 = datetime.now()
     list1.sort()
@@ -201,7 +206,7 @@ def file_search(file_name, drive=None):
             # print re.sub("?\d+", "", each)
             print index + 1, " ", item.split("|")[0]
             print "---------------------------------"
-        d_f = raw_input( "Press d to open folder and press f to open file or press enter for both ")
+        d_f = raw_input( "Press d to open folder or press f to open file or press enter for both ")
         d_f = d_f.lower()
 
         num = raw_input("Enter the number ")
