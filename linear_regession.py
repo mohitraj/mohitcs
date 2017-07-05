@@ -49,6 +49,19 @@ class stats:
         np_array = self.list_to_array(array)
         return self.array_to_reg(np_array)
 
+    def correlation(self,x,y):
+        x= np.array(x)
+        y=np.array(y)
+        return np.corrcoef([x,y])[0][1]
+
+    def correlation_multiple(self,*var):
+        corr_result=[]
+        return np.corrcoef(var)
+
+
+
+
+
 
 class Linear_Regression(stats):
     def __init__(self):
@@ -101,21 +114,22 @@ X_test = [8,9,11,16,12]
 Y_test = [11,8.5,15,18,11]
 
 
-
+'''
 
 X_a = obj1.list_to_array(X_values)
 Y_a = obj1.list_to_array(Y_values)
 
 X_t = obj1.list_to_array(X_test)
 
-'''
+
 Y_t = obj1.list_to_array(Y_test)
 print obj1.beta_coff(X_a,Y_a)
 print obj1.intercept(X_a,Y_a)
 print obj1.R_squared(X_a,Y_a, X_t,Y_t)
-'''
+
 y_pd=  obj1.predicted(X_a,Y_a, X_t)
 print y_pd
 print X_t
 print obj1.plot1(X_a,Y_a,X_test,y_pd)
-
+'''
+print obj1.correlation_multiple( X_values, Y_values,X_test)
