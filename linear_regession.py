@@ -41,9 +41,10 @@ class stats:
     def covariance(self,X_array,Y_array):
         return np.cov(X_array, Y_array)[0][1]
 
-    def np_to_reg(self,array):
-        length = len(array)
-        return array.reshape((length, 1))
+    def independent_variables(self,*var):
+        a = np.array(var)
+        return a.T
+
 
     def array_to_reg(self,array):
         np_array = self.list_to_array(array)
@@ -80,22 +81,17 @@ class Linear_Regression(stats):
 
     def R_squared(self,x_tain,y_train,x_test,y_test):
         model = LinearRegression()
-        x_tain = self.np_to_reg(x_tain)
-        y_train = self.np_to_reg(y_train)
-
-        x_test = self.np_to_reg(x_test)
-        y_test = self.np_to_reg(y_test)
         model.fit(x_tain,y_train)
         return model.score(x_test, y_test)
 
     def predicted(self,x_train,y_train,x_test):
         model = LinearRegression()
-        x_train = self.np_to_reg(x_train)
-        y_train = self.np_to_reg(y_train)
-
-        x_test = self.np_to_reg(x_test)
         model.fit(x_train, y_train)
         return  model.predict(x_test)
+
+
+
+
 
     def plot1(self,X_sc,Y_sc,x_data,y_data):
         plt.axis([0, 25, 0, 25])
@@ -107,29 +103,26 @@ class Linear_Regression(stats):
 
 obj1 = Linear_Regression()
 
-X_values =[6, 8, 10, 14, 18]  # replace it
-Y_values = [7, 9, 13, 17.5, 18]
+diameter =[6, 8, 10, 14, 18]  # replace it
+topping = [2,1,0,2,0]
+price = [7, 9, 13, 17.5, 18]
 
-X_test = [8,9,11,16,12]
-Y_test = [11,8.5,15,18,11]
-
-
-'''
-
-X_a = obj1.list_to_array(X_values)
-Y_a = obj1.list_to_array(Y_values)
-
-X_t = obj1.list_to_array(X_test)
+independent_var = obj1.independent_variables(diameter,topping)
 
 
-Y_t = obj1.list_to_array(Y_test)
-print obj1.beta_coff(X_a,Y_a)
-print obj1.intercept(X_a,Y_a)
-print obj1.R_squared(X_a,Y_a, X_t,Y_t)
 
-y_pd=  obj1.predicted(X_a,Y_a, X_t)
-print y_pd
-print X_t
-print obj1.plot1(X_a,Y_a,X_test,y_pd)
-'''
-print obj1.correlation_multiple( X_values, Y_values,X_test)
+diameter_test = [8,9,11,16,12]
+topping_test = [2,0,2,2,0]
+
+independent_var_test = obj1.independent_variables(diameter_test,topping_test)
+print obj1.predicted(independent_var,price,independent_var_test)
+
+
+
+price_test = [11,8.5,15,18,11]
+#print obj1.list_to_array(X_test)
+
+
+
+#print obj1.plot1(independent_var,obj1.list_to_array(price),obj1.list_to_array(price_test),obj1.predicted(independent_var,price,independent_var_test),)
+#print obj1.correlation_multiple( X_values, Y_values,X_test)
