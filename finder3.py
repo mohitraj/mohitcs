@@ -13,7 +13,7 @@ from difflib import SequenceMatcher
 
 dict1 = {}
 i = 1
-
+Anonymous=False
 
 def folder_open(path):
     path = path.rsplit("/", 1)[0]
@@ -28,7 +28,41 @@ def folder_open(path):
         os.chdir(path_list[-1].split(":")[0])
     subprocess.Popen(r'explorer /select,"." ')
 
+def file_read(file_name):
+    pickle_file = open(file_name,'r')
+    values = cPickle.load(pickle_file) 
+    pickle_file.close()
+    return values
 
+def file_write(file_name,data):
+    pickle_file = open(file_name,'w')
+    cPickle.dump(data,pickle_file)
+    pickle_file.close()
+
+	
+    
+
+def save_search(path1):
+    file_path= os.path.expanduser('~')
+    os.chdir(file_path)
+    size = 10
+    file_name = "save_search.raj"
+    f_ok = os.access(file_name, os.F_OK)
+    if f_ok:
+        data= file_read(file_name)
+        if path1 not in data:
+            if len(data)>size:
+                data.pop()
+            data.insert(0,path1)
+            file_write(file_name,data)
+            		
+    else :
+        list1 = [path1]
+        file_write(file_name,list1)
+    print "search recorded\n"		
+		
+        
+	
 def file_run(path1):
     path= path1[2:]
 
@@ -42,11 +76,36 @@ def file_run(path1):
     if file_list[0]:
         for each in file_list:
            os.chdir(each)
-        print "yes"
+        #print "yes"
     file_to_open= file_to_open.strip()
     file_name = '"'+file_to_open +'"'
 
     os.startfile(file_name)
+    print "Anonymous",Anonymous
+    if Anonymous== False:
+        save_search(path1)
+
+def show_search():
+    file_path= os.path.expanduser('~')
+    os.chdir(file_path)
+    file_name = "save_search.raj"
+    f_ok = os.access(file_name, os.F_OK)
+    if f_ok:
+        choice_list = file_read(file_name)
+        print "\n*******************************************"
+        for index, item in enumerate(choice_list):
+            print index+1, " ", item
+            print "---------------------------------------"*2
+        print "\n*******************************************"
+        num = raw_input("Enter the number of the file you want to run or press n :\t")
+        try:
+            num = int(num)
+            file_run(choice_list[num - 1])
+        except:
+            pass
+   
+	
+    
 
 
 class ratio_mohit(SequenceMatcher):
@@ -235,21 +294,24 @@ def file_search(file_name, drive=None):
 
 
 def main():
-    parser = argparse.ArgumentParser(version='3.0')
+    parser = argparse.ArgumentParser(version='4.0')
     # parser.add_argument("file_name",help="For creating index databases", type= str)
     parser.add_argument("file_name", nargs='?')
+    parser.add_argument('-l', help="To show the most recent searches", action='store_true')
     parser.add_argument('-c', help="For creating index databases", action='store_true')
+    parser.add_argument('-a', nargs=1, help="If you don't want to save the save the search")
     # parser.add_argument('-w',help="New value", action='store_true')
-    parser.add_argument('-s', nargs=3,
-                        help='Takes three arguments first file_name second percentage in numeric and third how many suggestions like abc 80 10')
+    parser.add_argument('-s', nargs=3,help='Takes three arguments first file_name second percentage in numeric and third how many suggestions like abc 80 10')
     parser.add_argument('-d', nargs=2, help='Filter by drive,finder -d <file-name> drive_name')
-
+    
     args = parser.parse_args()
 
     try:
 
         if args.c:
             create()
+        elif args.l:
+            show_search()
 
         elif args.s:
             # print args.s
@@ -258,8 +320,24 @@ def main():
 
         elif args.d:
             file_search(args.d[0], args.d[1])
+        elif args.a:
+            file = args.a[0]
+            if file != None and file != "":
+                if file.isspace():
+                    print "Please give file name"
+                else:
+                    global Anonymous
+                    Anonymous= True	
+                    file_search(file)
         else:
-            file_search(args.file_name)
+            if args.file_name != None and args.file_name != "":
+                if args.file_name.isspace():
+                    print "Please give file name"
+                else:
+                    file_search(args.file_name)
+                
+            else :
+                print "Please give file name \n"
         print "Thanks for using L4wisdom.com"
         print "Email id mohitraj.cs@gmail.com"
         print "URL: http://l4wisdom.com/finder_go.php"
