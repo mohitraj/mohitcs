@@ -11,6 +11,7 @@ import cPickle
 import argparse
 import hashlib
 import collections
+import subprocess
 
 dict1 = collections.defaultdict(list)
 
@@ -20,6 +21,15 @@ def md5(fname,size=4096):
         for chunk in iter(lambda: f.read(size), b""):
             hash_md5.update(chunk)
     return hash_md5.hexdigest()
+	
+	
+def sha256(fname,size=4096):
+    hash_sha256 = hashlib.sha256()
+    with open(fname, "rb") as f:
+        for chunk in iter(lambda: f.read(size), b""):
+            hash_sha256.update(chunk)
+    return hash_sha256.hexdigest()	
+	
 
 def all_duplicate(file_dict):
 	
@@ -32,6 +42,8 @@ def all_duplicate(file_dict):
 				str1 = i+"\n"
 				file_txt.write(str1)
 	file_txt.close()
+	subprocess.Popen(["notepad", "duplicate.txt"])
+	sys.exit(0)
 
 def get_drives():
 	response = os.popen("wmic logicaldisk get caption")
@@ -134,7 +146,8 @@ def main():
 	
 	parser.add_argument('-c',nargs='?', help="For creating MD5 hash of all files",const=4096, type=int)
 	parser.add_argument('-a',help="To get all duplicate files in duplicate.txt in running current folder", action='store_true')
-	parser.add_argument('-f',help="To find the MD5 hash,provide file with path in double quotes ", nargs=1,)
+	parser.add_argument('-m',help="To find the MD5 hash,provide file with path in double quotes ", nargs=1,)
+	parser.add_argument('-sha256',help="To find the sha256 hash,provide file with path in double quotes ", nargs=1,)
 	
 	args = parser.parse_args()	
 	try:
@@ -146,12 +159,21 @@ def main():
 			file_dict  = file_open()
 			all_duplicate(file_dict)
 			
-		elif args.f :
-			if os.access(args.f[0], os.R_OK):
-				print "Md5 Signature are : ", md5(args.f[0],4096)
+		elif args.m :
+			if os.access(args.m[0], os.R_OK):
+				print "Md5 Signature are : ", md5(args.m[0],4096)
 				print "\n"
 			else :
 				print "Check the file path and file name\n"
+				
+				
+		elif args.sha256 :
+			if os.access(args.sha256[0], os.R_OK):
+				print "sha256 Signature are : ", sha256(args.sha256[0],4096)
+				print "\n"
+			else :
+				print "Check the file path and file name\n"		
+				
 		else:
 			file_search(args.file_name)
 		print "Thanks for using L4wisdom.com"
