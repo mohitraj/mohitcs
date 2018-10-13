@@ -98,7 +98,7 @@ class file_backup():
 
     @staticmethod
     def filter_list(e_list,all_files):
-        for each in all_files.keys():
+        for each in list(all_files.keys()):
             each1= each.lower()
             for e in e_list:
                 e = e.lower()
@@ -156,7 +156,7 @@ class file_backup():
 
         for k,v in d2.items():
             i = i + 1
-            print (i, ":",time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime(v)),b, k)
+            print (Fore.WHITE +Style.BRIGHT + str(i), ":",time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime(v)),b, k)
             print (a)
             if i== number_of_files:
                 break
@@ -167,11 +167,11 @@ class file_backup():
         print ("Time taken ", total_time)
         try:
             if i:
-                ch = raw_input("Press D to open folder or F to open file or M to move files or C to copy files\t")
+                ch = input("Press D to open folder or F to open file or M to move files or C to copy files\t")
                 ch = ch.lower()
                 if ch == 'c' or ch=='m':
-                    n = raw_input('Enter the number of the files for multiple files give number with space or type "ALL" for all files \t')
-                    d = raw_input('Enter the path \t ')
+                    n = input('Enter the number of the files for multiple files give number with space or type "ALL" for all files \t')
+                    d = input('Enter the path \t ')
                     if n =='ALL':
                         files = d2.keys()
 
@@ -185,7 +185,7 @@ class file_backup():
                         self.copy_files(d,files,m_or_c=1)
 
                 elif ch=='d' or ch=='f':
-                    num = int(raw_input("Enter the number \t"))
+                    num = int(input("Enter the number \t"))
                     path=d2.keys()[num-1]
                     if ch=='d':
                         self.folder_open(path)
