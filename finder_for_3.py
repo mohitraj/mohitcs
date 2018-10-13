@@ -10,6 +10,7 @@ import subprocess
 import pickle
 import argparse
 from difflib import SequenceMatcher
+from functools import reduce
 from colorama import init,Fore, Back, Style
 init(autoreset=True)
 _a = (Fore.CYAN + '-----------------------------------------------------------------')
