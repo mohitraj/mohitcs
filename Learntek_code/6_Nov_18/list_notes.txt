@@ -1,0 +1,37 @@
+Updating the list1
+
+-----------------------------------------------
+Avengers = ['hulk', 'iron-man', 'Captain', 'Thor']
+
+Avengers[2] = "Captain-America"
+
+if you know the index 
+---------------------------------------------
+
+Deletion 
+
+
+if you know the index
+>>> Avengers
+['hulk', 'iron-man', 'Captain-America', 'Thor']
+>>>
+>>>
+>>> Avengers[1]
+'iron-man'
+>>>
+>>> del Avengers[1]
+>>>
+>>> Avengers
+['hulk', 'Captain-America', 'Thor']
+>>>
+
+Remove(),, if you don't know the index, 
+
+pop if you want to know the removed value
+
+-------------ADD the values ---------------
+Append() to add the values at the end of the list
+Extend()
+insert
+
+
