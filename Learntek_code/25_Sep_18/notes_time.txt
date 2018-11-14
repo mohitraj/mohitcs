@@ -1,0 +1,99 @@
+notes ---
+
+to current epoch ---- time.time()
+
+convert human to epoch --- >    epoch --> ninetuple -> human-readable 
+--------------------------------          time.strptime('15 Aug 2050', '%d %b %Y')---> time.mktime()
+
+for epoch to nine tuple format = time.localtime(epoch)
+
+Convert the epoch to human readable formate
+
+time.strftime("%d-%B %Y %H:%M:%S",t1)  where t1 is nine tuple format
+
+
+
+>>> import datetime
+>>> datetime.datetime.today()
+datetime.datetime(2018, 10, 12, 7, 11, 17, 753860)
+>>> print (datetime.datetime.today())
+2018-10-12 07:11:28.427372
+>>>
+>>>
+>>> print (datetime.datetime.now())
+2018-10-12 07:11:52.374378
+>>>
+datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)
+
+
+
+
+C:\Users\Mohit>python3
+Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 27 2018, 04:59:51) [MSC v.1914 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import datetime
+>>> datetime.datetime.today()
+datetime.datetime(2018, 10, 12, 7, 11, 17, 753860)
+>>> print (datetime.datetime.today())
+2018-10-12 07:11:28.427372
+>>>
+>>>
+>>> print (datetime.datetime.now())
+2018-10-12 07:11:52.374378
+>>>
+>>>
+>>>
+>>> delta1 = datetime.timedelta(seconds=-10)
+>>> delta2 = datetime.timedelta(seconds=10)
+>>>
+>>> delta1
+datetime.timedelta(days=-1, seconds=86390)
+>>> delta2
+datetime.timedelta(seconds=10)
+>>> now1 = datetime.datetime.now()
+>>> now1
+datetime.datetime(2018, 10, 12, 7, 16, 45, 123111)
+>>>
+>>> d1 = now1 + delta1
+>>> d2 = now1 + delta2
+>>>
+>>> d1
+datetime.datetime(2018, 10, 12, 7, 16, 35, 123111)
+>>> d2
+datetime.datetime(2018, 10, 12, 7, 16, 55, 123111)
+>>>
+>>> delta2 = datetime.timedelta(days=10,hours=1)
+>>>
+>>> d1 = now1 + delta2
+>>> print (d1)
+2018-10-22 08:16:45.123111
+>>> 2018-10-22 08:16:45.12311
+  File "<stdin>", line 1
+    2018-10-22 08:16:45.12311
+                ^
+SyntaxError: invalid token
+>>>
+>>>
+>>> d1
+datetime.datetime(2018, 10, 22, 8, 16, 45, 123111)
+>>>
+>>> d1 = str(d1)
+>>>
+>>> d1
+'2018-10-22 08:16:45.123111'
+>>>
+>>> d1.rsplit(".",1)
+['2018-10-22 08:16:45', '123111']
+>>> d1.rsplit(".",1)[0]
+'2018-10-22 08:16:45'
+>>>
+>>> time.mktime(time.strptime('2018-10-22 08:16:45', '%Y-%m-%d  %H:%M:%S'))
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'time' is not defined
+>>> import time
+>>> time.mktime(time.strptime('2018-10-22 08:16:45', '%Y-%m-%d  %H:%M:%S'))
+1540176405.0
+>>>
+
+

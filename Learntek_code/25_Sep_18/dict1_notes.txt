@@ -1,0 +1,4 @@
+Access the values---------
+
+dict1 = {22: 'SSH', 23: 'Telnet', 20: 'FTP', 53: 'DNS', (12, 45): 'Combine', 81: 'Web server http'}
+

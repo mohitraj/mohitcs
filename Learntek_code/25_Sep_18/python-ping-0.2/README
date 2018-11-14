@@ -1,0 +1,9 @@
+This library is a fork of George Notaras' python-ping library, which is
+an implementation of the standard ICMP ping in pure Python.
+
+As it uses raw ICMP sockets, you need to be root to use the functions
+exported by the ping module.
+
+This fork by Pierre Bourdon adds a setup.py file in order to permit an
+easier distribution of the package. The license of the library remains
+unchanged (GPLv2), see COPYING.

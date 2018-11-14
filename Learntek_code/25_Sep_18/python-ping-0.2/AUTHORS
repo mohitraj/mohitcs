@@ -1,0 +1,8 @@
+This library is a fork of the python-ping library created by George Notaras
+and released under the GNU GPLv2 license.
+
+This fork was created by Pierre Bourdon <delroth@gmail.com>.
+
+Contributors:
+ - Georgi Kolev contributed a way to specify the packet size and a quiet ping
+   function returning statistics (avg and max round trip time)

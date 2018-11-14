@@ -1,0 +1,10 @@
+TFTP offers a method of file transfer 
+without the session establishment 
+requirements mohit that 
+FTP uses. mohit Because TFTP uses UDP instead of 
+TCP it has no way of ensuring the file has been 
+properly transferred, the end device must 
+be able to check the file to ensure proper transfer.
+ TFTP is typically mohit used by devices to upgrade 
+ software and firmware; this includes Cisco and 
+ other network vendors’ equipment.

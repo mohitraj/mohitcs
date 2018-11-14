@@ -1,0 +1,12 @@
+>>>
+>>> import sys
+>>> sys.platform
+'win32'
+
+
+>>> import platform
+>>> platform.system()
+'Windows'
+>>> import os
+>>> os.name
+'nt'

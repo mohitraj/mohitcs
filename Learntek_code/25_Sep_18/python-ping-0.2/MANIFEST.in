@@ -1,0 +1,4 @@
+include README
+include COPYING
+include AUTHORS
+include setup.py
