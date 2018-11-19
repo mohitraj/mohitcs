@@ -173,12 +173,12 @@ class file_backup():
                     n = input('Enter the number of the files for multiple files give number with space or type "ALL" for all files \t')
                     d = input('Enter the path \t ')
                     if n =='ALL':
-                        files = d2.keys()
+                        files = list(d2.keys())
 
                     else :
                         numbers = n.split()
                         print (numbers)
-                        files = [d2.keys()[int(num)-1] for num in numbers]
+                        files = [list(d2.keys())[int(num)-1] for num in numbers]
                     if ch == 'c':
                         self.copy_files(d,files)
                     elif ch== 'm':
@@ -186,7 +186,7 @@ class file_backup():
 
                 elif ch=='d' or ch=='f':
                     num = int(input("Enter the number \t"))
-                    path=d2.keys()[num-1]
+                    path=list(d2.keys())[num-1]
                     if ch=='d':
                         self.folder_open(path)
                     elif ch=='f':
